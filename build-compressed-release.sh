@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -e
+
 mkdir -p zig-out/bin
 
 echo Old:
