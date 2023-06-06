@@ -10,7 +10,7 @@ jobs:
       - uses: goto-bus-stop/setup-zig@v2
         with:
           version: 0.10.1
-      - run: zig build -Drelease-small
+      - run: ./build-compressed-release.sh
       - run: ls -l zig-out/bin
   lint_format:
     runs-on: ubuntu-latest

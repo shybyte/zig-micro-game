@@ -1,0 +1,58 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "zig build run",
+            "problemMatcher": [
+                "$zig"
+            ],
+            "presentation": {
+                "clear": true
+            }
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "zig build",
+            "problemMatcher": [
+                "$zig"
+            ]
+        },
+        {
+            "label": "build release-small",
+            "type": "shell",
+            "command": "zig build -Drelease-small && ls -l zig-out/bin",
+            "problemMatcher": [
+                "$zig"
+            ]
+        },
+        {
+            "label": "build-compressed-release",
+            "type": "shell",
+            "command": "./build-compressed-release.sh",
+            "problemMatcher": [
+                "$zig"
+            ]
+        },
+        {
+            "label": "run release-fast",
+            "type": "shell",
+            "command": "zig build run -Drelease-fast",
+            "problemMatcher": [
+                "$zig"
+            ]
+        },
+        {
+            "label": "run release-safe",
+            "type": "shell",
+            "command": "zig build run -Drelease-safe",
+            "problemMatcher": [
+                "$zig"
+            ]
+        },
+    ]
+}
