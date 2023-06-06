@@ -9,7 +9,7 @@ Tested with zig v0.10.1 on Ubuntu 20.04.
 
 Install lib dev packages:
 
-    sudo apt install libgtk-3-dev libgl-dev
+    sudo apt install libgtk-3-dev libgl-dev libasound2-dev
 
 Run with:
 
