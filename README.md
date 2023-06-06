@@ -5,7 +5,7 @@ How to write a very small Linux game in Zig.
 
 ## Build and Run
 
-Tested with zig v0.10.1 on Ubuntu 21.04.
+Tested with zig v0.10.1 on Ubuntu 20.04.
 
 Install lib dev packages:
 
