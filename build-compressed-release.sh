@@ -25,3 +25,5 @@ chmod u+x zig-out/bin/zig-micro-game-compressed
 echo Final:
 ls -l zig-out/bin
 
+ls -lhS zig-out/bin | cut -d ' ' -f 5,10 | grep -v '^$' >size.txt
+
