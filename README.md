@@ -1,6 +1,6 @@
 # zig-micro-game
 
-How to write a very small game in zig.
+How to write a very small Linux game in Zig.
 
 
 ## Build and Run
