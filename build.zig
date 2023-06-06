@@ -12,6 +12,10 @@ pub fn build(b: *std.build.Builder) void {
     const mode = b.standardReleaseOptions();
 
     const exe = b.addExecutable("zig-micro-game", "src/main.zig");
+    exe.linkSystemLibrary("c");
+    exe.linkSystemLibrary("gl");
+    exe.linkSystemLibrary("gtk+-3.0");
+
     exe.setTarget(target);
     exe.setBuildMode(mode);
     exe.install();
