@@ -1,5 +1,7 @@
 const std = @import("std");
+const linux = std.os.linux;
 
-pub fn main() !void {
-    std.io.getStdOut().writeAll("Hello, World!\n") catch unreachable;
+pub export fn _start() callconv(.Naked) noreturn {
+    _ = linux.write(1, "hello", 5);
+    linux.exit(0);
 }
