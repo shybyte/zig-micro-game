@@ -15,6 +15,7 @@ pub fn build(b: *std.build.Builder) void {
     exe.linkSystemLibrary("c");
     exe.linkSystemLibrary("gl");
     exe.linkSystemLibrary("gtk+-3.0");
+    exe.linkSystemLibrary("asound");
 
     exe.setTarget(target);
     exe.setBuildMode(mode);

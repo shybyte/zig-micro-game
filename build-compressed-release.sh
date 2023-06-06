@@ -25,5 +25,5 @@ chmod u+x zig-out/bin/zig-micro-game-compressed
 echo Final:
 ls -l zig-out/bin
 
-ls -l zig-out/bin | cut -d ' ' -f 5,10 | grep -v '^$' >size.txt
+ls -l zig-out/bin | awk '{print $5, $9}'| grep -v '^\s*$' >size.txt
 

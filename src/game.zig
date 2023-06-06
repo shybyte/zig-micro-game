@@ -1,6 +1,7 @@
 const std = @import("std");
 const gfx_utils = @import("./utils/gfx.zig");
 const Keys = @import("./utils/keys.zig").Keys;
+const synth = @import("./synth.zig");
 
 const gl = @cImport({
     @cDefine("GL_GLEXT_PROTOTYPES", {});
@@ -59,19 +60,24 @@ pub fn render(screen_width: c_int, screen_height: c_int, time: f32) void {
 
 pub fn keyPress(key: Keys, time: f64) void {
     _ = time;
+
     // std.debug.print("main-game: keyPress: {any}\n", .{key});
     switch (key) {
         .left => {
             player_x -= player_speed;
+            synth.playNote(69);
         },
         .right => {
             player_x += player_speed;
+            synth.playNote(72);
         },
         .up => {
             player_y += player_speed;
+            synth.playNote(76);
         },
         .down => {
             player_y -= player_speed;
+            synth.playNote(68);
         },
         else => {},
     }

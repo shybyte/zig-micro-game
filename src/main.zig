@@ -1,7 +1,10 @@
 const std = @import("std");
 const gtk = @import("utils/gtk.zig");
-const game = @import("game.zig");
 const Keys = @import("utils/keys.zig").Keys;
+const sound = @import("utils/sound.zig");
+const config = @import("config.zig");
+const synth = @import("synth.zig");
+const game = @import("game.zig");
 
 var is_fullscreen: bool = false;
 
@@ -88,7 +91,12 @@ fn activate(app: *gtk.GtkApplication, _: gtk.gpointer) void {
     gtk.gtk_widget_show_all(window);
 }
 
-pub export fn main() u8 {
+pub fn main() !u8 {
+    if (config.ENABLE_SOUND) try sound.init(synth.generate);
+    defer {
+        if (config.ENABLE_SOUND) sound.deinit();
+    }
+
     var app = gtk.gtk_application_new("zig.micro.game", gtk.G_APPLICATION_FLAGS_NONE);
     defer gtk.g_object_unref(app);
     _ = gtk.g_signal_connect_(app, "activate", @ptrCast(gtk.GCallback, &activate), null);
