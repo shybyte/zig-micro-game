@@ -5,9 +5,9 @@ const Keys = @import("./utils/keys.zig").Keys;
 const gl = @cImport({
     @cDefine("GL_GLEXT_PROTOTYPES", {});
     @cInclude("GL/gl.h");
-    @cInclude("GL/glx.h");
-    @cInclude("GL/glu.h");
-    @cInclude("GL/glext.h");
+    // @cInclude("GL/glx.h");
+    // @cInclude("GL/glu.h");
+    // @cInclude("GL/glext.h");
 });
 
 const fragment_shader_src = @embedFile("shader/triangle.frag");

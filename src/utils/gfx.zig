@@ -4,9 +4,9 @@ const config = @import("../config.zig");
 const gl = @cImport({
     @cDefine("GL_GLEXT_PROTOTYPES", {});
     @cInclude("GL/gl.h");
-    @cInclude("GL/glx.h");
-    @cInclude("GL/glu.h");
-    @cInclude("GL/glext.h");
+    // @cInclude("GL/glx.h");
+    // @cInclude("GL/glu.h");
+    // @cInclude("GL/glext.h");
 });
 
 pub fn createShaderProgram(vertex_shader_src: []const u8, fragment_shader_src: []const u8) u32 {
