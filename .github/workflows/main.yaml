@@ -8,11 +8,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: goto-bus-stop/setup-zig@v2
-      - run: zig build run -Drelease-small
+        with:
+          version: 0.10.1
+      - run: zig build -Drelease-small
       - run: ls -l zig-out/bin
   lint_format:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: goto-bus-stop/setup-zig@v2
+        with:
+            version: 0.10.1
       - run: zig fmt --check src/*.zig
