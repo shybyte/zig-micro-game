@@ -5,7 +5,7 @@ How to write a very small game in zig.
 
 ## Build and Run
 
-Ensure libgtk3 development headers are installed (ex: libgtk-3-dev). Tested with zig v0.10.1 on Ubuntu 21.04.
+Tested with zig v0.10.1 on Ubuntu 21.04.
 
 Install lib dev packages:
 
