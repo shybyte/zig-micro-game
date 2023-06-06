@@ -11,6 +11,7 @@ jobs:
         with:
           version: 0.10.1
       - run: sudo apt install libgtk-3-dev libgl-dev
+      - run: ls /usr/include/GL/ 
       - run: ./build-compressed-release.sh
       - run: ls -l zig-out/bin
       - name: Archive build artifacts
