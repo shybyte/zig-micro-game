@@ -12,16 +12,13 @@ jobs:
           version: 0.10.1
       - run: ./build-compressed-release.sh
       - run: ls -l zig-out/bin
-      - name: Archive build artifacts uncompressed
-        uses: actions/upload-artifact@v2
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v3
         with:
           name: zig-micro-game
-          path: zig-out/bin/zig-micro-game      
-      - name: Archive build artifacts compressed
-        uses: actions/upload-artifact@v2
-        with:
-          name: zig-micro-game
-          path: zig-out/bin/zig-micro-game-compressed      
+          path: |
+            zig-out/bin/zig-micro-game
+            zig-out/bin/zig-micro-game-compressed
   lint_format:
     runs-on: ubuntu-latest
     steps:
