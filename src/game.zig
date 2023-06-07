@@ -16,7 +16,7 @@ const vertex_shader_src = @embedFile("shader/triangle.vert");
 
 var player_x: f32 = 0;
 var player_y: f32 = 0;
-const player_speed = 0.1;
+const player_speed = 0.3;
 
 var VBO: gl.GLuint = undefined;
 var VAO: gl.GLuint = undefined;
