@@ -1,3 +1,3 @@
-18264 zig-micro-game
-7234 zig-micro-game-compressed
-7058 zig-micro-game.lzma
+19448 zig-micro-game
+7669 zig-micro-game-compressed
+7493 zig-micro-game.lzma
