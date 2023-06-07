@@ -41,6 +41,8 @@ pub fn init(allocator: std.mem.Allocator) void {
     gl.glBufferData(gl.GL_ARRAY_BUFFER, @sizeOf(f32) * vertices.len, &vertices, gl.GL_STATIC_DRAW);
     gl.glVertexAttribPointer(0, 2, gl.GL_FLOAT, gl.GL_FALSE, 2 * @sizeOf(f32), null);
     gl.glEnableVertexAttribArray(0);
+
+    synth.startSong();
 }
 
 pub fn render(screen_width: c_int, screen_height: c_int, time: f32) void {

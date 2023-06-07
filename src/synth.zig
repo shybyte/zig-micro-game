@@ -23,17 +23,21 @@ var voices: [2]Voice = .{
     Voice{ .instrument = .{ .osc_type = OscType.saw } },
 };
 
-var global_time_index: usize = 0;
+var song_time_index: usize = 0;
+var song_on: bool = false;
 const song_speed = 4;
 const base_notes: [4]u8 = [_]u8{ 69, 77, 72, 79 };
 
 pub fn generate() sound.Frame {
     var result: sound.Frame = .{};
 
-    if (@mod(global_time_index, sound.RATE / song_speed) == 0) {
-        const note_index = global_time_index / (sound.RATE / song_speed);
-        const base_note = base_notes[(note_index / 8) % base_notes.len];
-        playNote(1, @intCast(u8, base_note - 12 * 3 + (note_index % 2 * 12)));
+    if (song_on) {
+        if (@mod(song_time_index, sound.RATE / song_speed) == 0) {
+            const note_index = song_time_index / (sound.RATE / song_speed);
+            const base_note = base_notes[(note_index / 8) % base_notes.len];
+            playNote(1, @intCast(u8, base_note - 12 * 3 + (note_index % 2 * 12)));
+        }
+        song_time_index += 1;
     }
 
     for (voices) |*voice| {
@@ -63,8 +67,6 @@ pub fn generate() sound.Frame {
         voice.time_index += 1;
     }
 
-    global_time_index += 1;
-
     return result.mul(0.5);
 }
 
@@ -88,6 +90,10 @@ pub fn playNote(voice_index: usize, note: u8) void {
     voice.on = true;
     voice.time_index = 0;
     voice.freq = midiNoteFrequency(note);
+}
+
+pub fn startSong() void {
+    song_on = true;
 }
 
 fn midiNoteFrequency(note: u8) f32 {
