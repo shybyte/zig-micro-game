@@ -106,6 +106,13 @@ pub const Frame = struct {
 
     const Self = @This();
 
+    pub fn mul(self: Self, val: f32) Self {
+        return .{
+            .l = self.l * val,
+            .r = self.r * val,
+        };
+    }
+
     pub fn clip(self: Self) Self {
         return .{
             .l = math.clamp(self.l, -1, 1),

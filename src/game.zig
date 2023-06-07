@@ -65,19 +65,19 @@ pub fn keyPress(key: Keys, time: f64) void {
     switch (key) {
         .left => {
             player_x -= player_speed;
-            synth.playNote(69);
+            synth.playNote(0, 72);
         },
         .right => {
             player_x += player_speed;
-            synth.playNote(72);
+            synth.playNote(0, 76);
         },
         .up => {
             player_y += player_speed;
-            synth.playNote(76);
+            synth.playNote(0, 77);
         },
         .down => {
             player_y -= player_speed;
-            synth.playNote(68);
+            synth.playNote(0, 69);
         },
         else => {},
     }

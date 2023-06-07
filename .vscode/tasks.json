@@ -20,7 +20,10 @@
             "command": "zig build",
             "problemMatcher": [
                 "$zig"
-            ]
+            ],
+            "presentation": {
+                "clear": true
+            }
         },
         {
             "label": "build release-small",
