@@ -1,13 +1,8 @@
 const std = @import("std");
-const gfx_utils = @import("./utils/gfx.zig");
 const Keys = @import("./utils/keys.zig").Keys;
 const synth = @import("./synth.zig");
 const tunnel = @import("./tunnel.zig");
 const triangle = @import("./triangle.zig");
-
-const gl = @cImport({
-    @cInclude("GL/gl.h");
-});
 
 var player_x: f32 = 0;
 var player_y: f32 = 0;
@@ -46,6 +41,7 @@ pub fn keyPress(key: Keys) void {
     }
 }
 
+// This can be useful if keeping a key pressed, should cause a continiuos movement.
 pub fn keyRelease(key: Keys, time: f64) void {
     _ = time;
     _ = key;

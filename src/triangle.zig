@@ -11,7 +11,7 @@ const fragment_shader_src = @embedFile("shader/triangle.frag");
 
 var VBO: gl.GLuint = undefined;
 var VAO: gl.GLuint = undefined;
-var p: gl.GLuint = undefined;
+var shader_program: gl.GLuint = undefined;
 
 const vertices = [_]f32{
     -0.1, -0.1,
@@ -20,7 +20,7 @@ const vertices = [_]f32{
 };
 
 pub fn init() void {
-    p = gfx_utils.createShaderProgram(vertex_shader_src, fragment_shader_src);
+    shader_program = gfx_utils.createShaderProgram(vertex_shader_src, fragment_shader_src);
 
     gl.glGenVertexArrays(1, &VAO);
     gl.glBindVertexArray(VAO);
@@ -33,9 +33,9 @@ pub fn init() void {
 }
 
 pub fn render(player_x: f32, player_y: f32, time: f32) void {
-    gl.glUseProgram(p);
-    gl.glUniform2f(gl.glGetUniformLocation(p, "uPlayerPos"), player_x, player_y);
-    gl.glUniform1f(gl.glGetUniformLocation(p, "iTime"), time);
+    gl.glUseProgram(shader_program);
+    gl.glUniform2f(gl.glGetUniformLocation(shader_program, "uPlayerPos"), player_x, player_y);
+    gl.glUniform1f(gl.glGetUniformLocation(shader_program, "iTime"), time);
 
     gl.glBindVertexArray(VAO);
     gl.glDrawArrays(gl.GL_TRIANGLES, 0, 3);

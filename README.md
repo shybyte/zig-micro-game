@@ -40,7 +40,7 @@ Build compressed release version:
 
     ./build-compressed-release.sh 
 
-Running this script will also update the [size.txt](./size.txt) file, so you are always in control of the file size and can compare it to previous versions.
+Running this script will also update the [size.txt](./size.txt) file, so you are always aware and in control of the file size and can compare it to previous versions.
 
 
 ## Inspired by

@@ -38,7 +38,7 @@ pub const GdkEventKeyZig = extern struct {
 
 var start_time: ?c_long = null;
 
-/// Returns the time in seconds.
+/// Returns the time since program start in seconds.
 pub fn getTime() f64 {
     const time = c.g_get_monotonic_time();
     if (start_time) |start_time_2| {
