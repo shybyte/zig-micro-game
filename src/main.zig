@@ -11,16 +11,14 @@ var is_fullscreen: bool = false;
 fn onRender(glArea: *gtk.GtkGLArea) bool {
     const screen_width = gtk.gtk_widget_get_allocated_width(@ptrCast(*gtk.GtkWidget, glArea));
     const screen_height = gtk.gtk_widget_get_allocated_height(@ptrCast(*gtk.GtkWidget, glArea));
-
     game.render(screen_width, screen_height, @floatCast(f32, gtk.getTime()));
-
     return true;
 }
 
 fn onRealize(glArea: *gtk.GtkGLArea) void {
     gtk.gtk_gl_area_make_current(glArea);
 
-    game.init(std.heap.page_allocator);
+    game.init();
 
     const context = gtk.gtk_gl_area_get_context(glArea);
     const glwindow = gtk.gdk_gl_context_get_window(context);
@@ -30,41 +28,43 @@ fn onRealize(glArea: *gtk.GtkGLArea) void {
 }
 
 fn keyPress(gtk_widget: *gtk.GtkWidget, event: *gtk.GdkEventKeyZig) bool {
-    const key = event.keyval;
-
-    if (key == gtk.GDK_KEY_Escape) {
-        gtk.gtk_widget_destroy(gtk_widget);
+    switch (event.keyval) {
+        gtk.GDK_KEY_Escape => gtk.gtk_widget_destroy(gtk_widget),
+        gtk.GDK_KEY_f => {
+            is_fullscreen = !is_fullscreen;
+            if (is_fullscreen) {
+                gtk.gtk_window_fullscreen(@ptrCast(*gtk.GtkWindow, gtk_widget));
+            } else {
+                gtk.gtk_window_unfullscreen(@ptrCast(*gtk.GtkWindow, gtk_widget));
+            }
+        },
+        else => {
+            game.keyPress(translateKey(event.keyval));
+        },
     }
-
-    if (key == gtk.GDK_KEY_f) {
-        is_fullscreen = !is_fullscreen;
-        if (is_fullscreen) {
-            gtk.gtk_window_fullscreen(@ptrCast(*gtk.GtkWindow, gtk_widget));
-        } else {
-            gtk.gtk_window_unfullscreen(@ptrCast(*gtk.GtkWindow, gtk_widget));
-        }
-    }
-
-    game.keyPress(translateKey(key), @floatCast(f32, gtk.getTime()));
 
     return true;
 }
 
 fn keyRelease(gtk_widget: *gtk.GtkWidget, event: *gtk.GdkEventKeyZig) bool {
     _ = gtk_widget;
-    const key = event.keyval;
-    game.keyRelease(translateKey(key), @floatCast(f32, gtk.getTime()));
+    game.keyRelease(translateKey(event.keyval), @floatCast(f32, gtk.getTime()));
     return true;
 }
 
 fn translateKey(gtk_key: u32) Keys {
     return switch (gtk_key) {
         gtk.GDK_KEY_Left, gtk.GDK_KEY_a => Keys.left,
-        gtk.GDK_KEY_Up => Keys.up,
-        gtk.GDK_KEY_Down => Keys.down,
+        gtk.GDK_KEY_Up, gtk.GDK_KEY_w => Keys.up,
+        gtk.GDK_KEY_Down, gtk.GDK_KEY_s => Keys.down,
         gtk.GDK_KEY_Right, gtk.GDK_KEY_d => Keys.right,
         gtk.GDK_KEY_space, gtk.GDK_KEY_Control_L, gtk.GDK_KEY_Control_R => Keys.jump,
-        else => Keys.unkown,
+        else => {
+            if (config.DEBUG) {
+                std.debug.print("Unknown key pressed: {}\n", .{gtk_key});
+            }
+            return Keys.unkown;
+        },
     };
 }
 
