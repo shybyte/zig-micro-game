@@ -6,7 +6,7 @@ The compressed binary of this example "game" has 8K and contains:
 
 * A trippy animated GLSL shader background
 * A (OpenGL) triangle that can be moved with the cursor keys
-* Interative sound effects: Moving the triangle plays notes.
+* Interative sound effects: Moving the triangle plays notes
 * Simple music generated in real time
 
 Predefined keyboard shortcuts:
