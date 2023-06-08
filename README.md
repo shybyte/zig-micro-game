@@ -20,7 +20,7 @@ Predefined keyboard shortcuts:
 
 Please note that the animation is in reality much smoother (60fps) and with no screen tearing compared to this video: 
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/9-FE2YLY7X0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+[![Demo Video](http://img.youtube.com/vi/9-FE2YLY7X0/0.jpg)](http://www.youtube.com/watch?v=9-FE2YLY7X0 "Demo Video")
 
 If you want to build a real small game based on this basis, have a look at [game.zig](./src/game.zig) and have fun!
 
