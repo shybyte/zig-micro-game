@@ -55,7 +55,7 @@ Running this script will also update the [size.txt](./size.txt) file, so you are
 
 For debugging purposes its helpful to enable DEBUG in [config.zig](./src/config.zig).
 
-If you don't need sound you, can disable it by setting ENABLE_SOUND in [config.zig](./src/config.zig) to false.
+If you don't need sound, you can disable it by setting ENABLE_SOUND in [config.zig](./src/config.zig) to false.
 
 ## Inspired by
 
