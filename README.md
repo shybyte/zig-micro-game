@@ -4,7 +4,7 @@ How to write a very small Linux game in Zig.
 
 The goal of this project is to provide a working example of a small Linux game,
 that can be used as starting point for your own game development.
-This makes it easier to compete in game jams like the [4MB Jam](https://itch.io/jam/4mb).
+This makes it easier to compete in game jams like the [4MB Jam](https://itch.io/jam/4mb-jam-2023).
 
 The compressed binary of this example "game" has 8K and it contains:
 
@@ -32,7 +32,7 @@ You might want to learn about OpenGL, for example here: [Learn OpenGL](https://l
 
 ## Build and Run
 
-Tested with zig v0.10.1 on Ubuntu 20.04.
+Tested with zig v0.10.1 on Ubuntu 20.04 and 22.04.
 
 First install [Zig](https://ziglang.org/learn/getting-started/).
 
