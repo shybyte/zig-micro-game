@@ -57,6 +57,10 @@ For debugging purposes its helpful to enable DEBUG in [config.zig](./src/config.
 
 If you don't need sound, you can disable it by setting ENABLE_SOUND in [config.zig](./src/config.zig) to false.
 
+## Games based on this template
+
+* [The Tunnel Effect](https://shybyte.itch.io/the-tunnel-effect)
+
 ## Inspired by
 
 * https://github.com/Swoogan/ziggtk
