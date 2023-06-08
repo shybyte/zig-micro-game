@@ -2,11 +2,15 @@
 
 How to write a very small Linux game in Zig.
 
-The compressed binary of this example "game" has 8K and contains:
+The goal of this project is to provide a working example of a small Linux game,
+that can be used as starting point for your own game development.
+This makes it easier to compete in game jams like the [4MB Jam](https://itch.io/jam/4mb).
+
+The compressed binary of this example "game" has 8K and it contains:
 
 * A trippy animated GLSL shader background
 * A (OpenGL) triangle that can be moved with the cursor keys
-* Interative sound effects: Moving the triangle plays notes
+* Interactive sound effects: Moving the triangle plays notes
 * Simple music generated in real time
 
 Predefined keyboard shortcuts:
@@ -24,11 +28,15 @@ Please note that the animation is in reality much smoother (60fps) and with no s
 
 If you want to build a real small game based on this basis, have a look at [game.zig](./src/game.zig) and have fun!
 
+You might want to learn about OpenGL, for example here: [Learn OpenGL](https://learnopengl.com/).
+
 ## Build and Run
 
 Tested with zig v0.10.1 on Ubuntu 20.04.
 
-Install lib dev packages:
+First install [Zig](https://ziglang.org/learn/getting-started/).
+
+Then install lib dev packages:
 
     sudo apt install libgtk-3-dev libgl-dev libasound2-dev
 
