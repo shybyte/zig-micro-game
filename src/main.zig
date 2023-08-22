@@ -9,9 +9,9 @@ const game = @import("game.zig");
 var is_fullscreen: bool = false;
 
 fn onRender(glArea: *gtk.GtkGLArea) bool {
-    const screen_width = gtk.gtk_widget_get_allocated_width(@ptrCast(*gtk.GtkWidget, glArea));
-    const screen_height = gtk.gtk_widget_get_allocated_height(@ptrCast(*gtk.GtkWidget, glArea));
-    game.render(screen_width, screen_height, @floatCast(f32, gtk.getTime()));
+    const screen_width = gtk.gtk_widget_get_allocated_width(@ptrCast(glArea));
+    const screen_height = gtk.gtk_widget_get_allocated_height(@ptrCast(glArea));
+    game.render(screen_width, screen_height, @floatCast(gtk.getTime()));
     return true;
 }
 
@@ -23,7 +23,7 @@ fn onRealize(glArea: *gtk.GtkGLArea) void {
     const context = gtk.gtk_gl_area_get_context(glArea);
     const glwindow = gtk.gdk_gl_context_get_window(context);
     const frame_clock = gtk.gdk_window_get_frame_clock(glwindow);
-    _ = gtk.g_signal_connect_swapped_(frame_clock, "update", @ptrCast(gtk.GCallback, &gtk.gtk_gl_area_queue_render), glArea);
+    _ = gtk.g_signal_connect_swapped_(frame_clock, "update", @ptrCast(&gtk.gtk_gl_area_queue_render), glArea);
     gtk.gdk_frame_clock_begin_updating(frame_clock);
 }
 
@@ -33,9 +33,9 @@ fn keyPress(gtk_widget: *gtk.GtkWidget, event: *gtk.GdkEventKeyZig) bool {
         gtk.GDK_KEY_f => {
             is_fullscreen = !is_fullscreen;
             if (is_fullscreen) {
-                gtk.gtk_window_fullscreen(@ptrCast(*gtk.GtkWindow, gtk_widget));
+                gtk.gtk_window_fullscreen(@as(*gtk.GtkWindow, @ptrCast(gtk_widget)));
             } else {
-                gtk.gtk_window_unfullscreen(@ptrCast(*gtk.GtkWindow, gtk_widget));
+                gtk.gtk_window_unfullscreen(@as(*gtk.GtkWindow, @ptrCast(gtk_widget)));
             }
         },
         else => {
@@ -48,7 +48,7 @@ fn keyPress(gtk_widget: *gtk.GtkWidget, event: *gtk.GdkEventKeyZig) bool {
 
 fn keyRelease(gtk_widget: *gtk.GtkWidget, event: *gtk.GdkEventKeyZig) bool {
     _ = gtk_widget;
-    game.keyRelease(translateKey(event.keyval), @floatCast(f32, gtk.getTime()));
+    game.keyRelease(translateKey(event.keyval), @as(f32, @floatCast(gtk.getTime())));
     return true;
 }
 
@@ -72,12 +72,12 @@ fn activate(app: *gtk.GtkApplication, _: gtk.gpointer) void {
     const window: *gtk.GtkWidget = gtk.gtk_application_window_new(app);
 
     const gl_area: *gtk.GtkWidget = gtk.gtk_gl_area_new();
-    gtk.gtk_container_add(@ptrCast(*gtk.GtkContainer, window), gl_area);
+    gtk.gtk_container_add(@ptrCast(window), gl_area);
 
-    _ = gtk.g_signal_connect_(gl_area, "realize", @ptrCast(gtk.GCallback, &onRealize), null);
-    _ = gtk.g_signal_connect_(gl_area, "render", @ptrCast(gtk.GCallback, &onRender), null);
+    _ = gtk.g_signal_connect_(gl_area, "realize", @as(gtk.GCallback, @ptrCast(&onRealize)), null);
+    _ = gtk.g_signal_connect_(gl_area, "render", @as(gtk.GCallback, @ptrCast(&onRender)), null);
 
-    const w = @ptrCast(*gtk.GtkWindow, window);
+    const w = @as(*gtk.GtkWindow, @ptrCast(window));
     gtk.gtk_window_set_title(w, "Zig Micro Game");
 
     gtk.gtk_window_set_default_size(w, 800, 600);
@@ -85,8 +85,8 @@ fn activate(app: *gtk.GtkApplication, _: gtk.gpointer) void {
         gtk.gtk_window_fullscreen(w);
     }
 
-    _ = gtk.g_signal_connect_(window, "key_press_event", @ptrCast(gtk.GCallback, &keyPress), null);
-    _ = gtk.g_signal_connect_(window, "key_release_event", @ptrCast(gtk.GCallback, &keyRelease), null);
+    _ = gtk.g_signal_connect_(window, "key_press_event", @as(gtk.GCallback, @ptrCast(&keyPress)), null);
+    _ = gtk.g_signal_connect_(window, "key_release_event", @as(gtk.GCallback, @ptrCast(&keyRelease)), null);
 
     gtk.gtk_widget_show_all(window);
 }
@@ -99,7 +99,7 @@ pub fn main() !u8 {
 
     var app = gtk.gtk_application_new("zig.micro.game", gtk.G_APPLICATION_FLAGS_NONE);
     defer gtk.g_object_unref(app);
-    _ = gtk.g_signal_connect_(app, "activate", @ptrCast(gtk.GCallback, &activate), null);
-    const status: i32 = gtk.g_application_run(@ptrCast(*gtk.GApplication, app), 0, null);
-    return @intCast(u8, status);
+    _ = gtk.g_signal_connect_(app, "activate", @as(gtk.GCallback, @ptrCast(&activate)), null);
+    const status: i32 = gtk.g_application_run(@as(*gtk.GApplication, @ptrCast(app)), 0, null);
+    return @as(u8, @intCast(status));
 }

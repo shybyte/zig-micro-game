@@ -9,7 +9,7 @@ const gl = @cImport({
 pub fn createShaderProgram(vertex_shader_src: []const u8, fragment_shader_src: []const u8) u32 {
     // compile fragment shader
     const fragment_shader = gl.glCreateShader(gl.GL_FRAGMENT_SHADER);
-    gl.glShaderSource(fragment_shader, 1, @ptrCast([*c]const [*c]const u8, &fragment_shader_src), null);
+    gl.glShaderSource(fragment_shader, 1, @ptrCast(&fragment_shader_src), null);
     gl.glCompileShader(fragment_shader);
 
     var is_fragment_compiled: i32 = 0;
@@ -20,7 +20,7 @@ pub fn createShaderProgram(vertex_shader_src: []const u8, fragment_shader_src: [
 
     // compile vertex shader
     const vertex_shader = gl.glCreateShader(gl.GL_VERTEX_SHADER);
-    gl.glShaderSource(vertex_shader, 1, @ptrCast([*c]const [*c]const u8, &vertex_shader_src), null);
+    gl.glShaderSource(vertex_shader, 1, @as([*c]const [*c]const u8, @ptrCast(&vertex_shader_src)), null);
     gl.glCompileShader(vertex_shader);
 
     var is_vertex_compiled: i32 = 0;
@@ -31,7 +31,7 @@ pub fn createShaderProgram(vertex_shader_src: []const u8, fragment_shader_src: [
         gl.glGetShaderiv(vertex_shader, gl.GL_INFO_LOG_LENGTH, &infoLogLength);
         std.debug.print("Error length: {}!\n", .{infoLogLength});
         var message: [1000]u8 = [_]u8{' '} ** 1000;
-        gl.glGetShaderInfoLog(vertex_shader, infoLogLength, null, @ptrCast([*c]u8, &message));
+        gl.glGetShaderInfoLog(vertex_shader, infoLogLength, null, @as([*c]u8, @ptrCast(&message)));
         std.debug.print("Error: {s}!\n", .{message});
     }
 

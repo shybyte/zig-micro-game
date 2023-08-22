@@ -75,9 +75,9 @@ const Output = struct {
             var i: usize = 0;
             while (i < FRAMES * CHANNELS) : (i += 1) {
                 var f = self.user_fn().clip();
-                self.buffer[i] = @floatToInt(i16, f.l * 32767);
+                self.buffer[i] = @as(i16, @intFromFloat(f.l * 32767));
                 i += 1;
-                self.buffer[i] = @floatToInt(i16, f.r * 32767);
+                self.buffer[i] = @as(i16, @intFromFloat(f.r * 32767));
             }
 
             const written = c.snd_pcm_writei(self.handle, &self.buffer[0], FRAMES);

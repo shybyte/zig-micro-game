@@ -35,19 +35,19 @@ pub fn generate() sound.Frame {
         if (@mod(song_time_index, sound.RATE / song_speed) == 0) {
             const note_index = song_time_index / (sound.RATE / song_speed);
             const base_note = base_notes[(note_index / 8) % base_notes.len];
-            playNote(1, @intCast(u8, base_note - 12 * 3 + (note_index % 2 * 12)));
+            playNote(1, @as(u8, @intCast(base_note - 12 * 3 + (note_index % 2 * 12))));
         }
         song_time_index += 1;
     }
 
-    for (voices) |*voice| {
+    for (&voices) |*voice| {
         if (!voice.on) {
             continue;
         }
 
         const instrument = voice.instrument;
 
-        const time: f32 = @intToFloat(f32, voice.time_index) / sound.RATE;
+        const time: f32 = @as(f32, @floatFromInt(voice.time_index)) / sound.RATE;
 
         if (time > instrument.env_attack + instrument.env_sustain + instrument.env_release) {
             voice.on = false;
@@ -97,6 +97,6 @@ pub fn startSong() void {
 }
 
 fn midiNoteFrequency(note: u8) f32 {
-    const half_steps = @intToFloat(f32, note) - 69.0;
+    const half_steps = @as(f32, @floatFromInt(note)) - 69.0;
     return 440 * std.math.pow(f32, 2.0, half_steps / 12.0);
 }

@@ -28,7 +28,7 @@
         {
             "label": "build release-small",
             "type": "shell",
-            "command": "zig build -Drelease-small && ls -l zig-out/bin",
+            "command": "zig build -Doptimize=ReleaseSmall && ls -l zig-out/bin",
             "problemMatcher": [
                 "$zig"
             ]
@@ -44,7 +44,7 @@
         {
             "label": "run release-fast",
             "type": "shell",
-            "command": "zig build run -Drelease-fast",
+            "command": "zig build run -Doptimize=ReleaseFast",
             "problemMatcher": [
                 "$zig"
             ]
@@ -52,7 +52,7 @@
         {
             "label": "run release-safe",
             "type": "shell",
-            "command": "zig build run -Drelease-safe",
+            "command": "zig build run -Doptimize=ReleaseSafe",
             "problemMatcher": [
                 "$zig"
             ]

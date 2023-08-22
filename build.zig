@@ -7,21 +7,23 @@ pub fn build(b: *std.build.Builder) void {
     // for restricting supported target set are available.
     const target = b.standardTargetOptions(.{});
 
-    // Standard release options allow the person running `zig build` to select
+    // Standard optimization options allow the person running `zig build` to select
     // between Debug, ReleaseSafe, ReleaseFast, and ReleaseSmall.
-    const mode = b.standardReleaseOptions();
+    const optimizeOption = b.standardOptimizeOption(.{});
 
-    const exe = b.addExecutable("zig-micro-game", "src/main.zig");
+    const exe = b.addExecutable(.{
+        .name = "zig-micro-game",
+        .root_source_file = .{ .path = "src/main.zig" },
+        .target = target,
+        .optimize = optimizeOption,
+    });
     exe.linkSystemLibrary("c");
     exe.linkSystemLibrary("gl");
     exe.linkSystemLibrary("gtk+-3.0");
     exe.linkSystemLibrary("asound");
+    b.installArtifact(exe);
 
-    exe.setTarget(target);
-    exe.setBuildMode(mode);
-    exe.install();
-
-    const run_cmd = exe.run();
+    const run_cmd = b.addRunArtifact(exe);
     run_cmd.step.dependOn(b.getInstallStep());
     if (b.args) |args| {
         run_cmd.addArgs(args);
@@ -29,11 +31,4 @@ pub fn build(b: *std.build.Builder) void {
 
     const run_step = b.step("run", "Run the app");
     run_step.dependOn(&run_cmd.step);
-
-    const exe_tests = b.addTest("src/main.zig");
-    exe_tests.setTarget(target);
-    exe_tests.setBuildMode(mode);
-
-    const test_step = b.step("test", "Run unit tests");
-    test_step.dependOn(&exe_tests.step);
 }

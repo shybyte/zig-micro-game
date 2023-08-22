@@ -36,7 +36,7 @@ pub fn init() void {
 pub fn render(screen_width: c_int, screen_height: c_int, time: f32) void {
     gl.glUseProgram(shader_program);
     gl.glUniform1f(gl.glGetUniformLocation(shader_program, "iTime"), time);
-    gl.glUniform2f(gl.glGetUniformLocation(shader_program, "iResolution"), @intToFloat(f32, screen_width), @intToFloat(f32, screen_height));
+    gl.glUniform2f(gl.glGetUniformLocation(shader_program, "iResolution"), @as(f32, @floatFromInt(screen_width)), @as(f32, @floatFromInt(screen_height)));
 
     gl.glBindVertexArray(VAO_QUAD);
     gl.glDrawArrays(gl.GL_TRIANGLE_STRIP, 0, 4);

@@ -10,7 +10,7 @@ echo
 
 rm -rf zig-out/bin
 
-zig build -Drelease-small -Dcpu=x86_64
+zig build -Doptimize=ReleaseSmall -Dcpu=x86_64
 echo Before strip:
 ls -l zig-out/bin
 echo

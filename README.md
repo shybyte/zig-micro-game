@@ -6,14 +6,14 @@ The goal of this project is to provide a working example of a small Linux game,
 that can be used as starting point for your own game development.
 This makes it easier to compete in game jams like the [4MB Jam](https://itch.io/jam/4mb-jam-2023).
 
-The compressed binary of this example "game" has only 8KB and it contains:
+The compressed binary of this example "game" has only 8.6KB and it contains:
 
 * A trippy animated GLSL shader background
 * A (OpenGL) triangle that can be moved with the cursor keys
 * Interactive sound effects: Moving the triangle plays notes
 * Simple music generated in real time
 
-Without sound it needs only 3.4 KB.
+Without sound it needs only 5.6 KB.
 
 Predefined keyboard shortcuts:
 * Esc = Quit
@@ -35,7 +35,7 @@ Please note that the animation is in reality much smoother (60fps) and with no s
 
 ## Build and Run
 
-Tested with zig v0.10.1 on Ubuntu 20.04 and 22.04.
+Tested with zig v0.11.0 on Ubuntu 20.04 and 22.04.
 
 First install [Zig](https://ziglang.org/learn/getting-started/).
 
